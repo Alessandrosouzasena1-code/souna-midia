@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Souna Studio Portfólio</title>
+<meta name="description" content="Souna Studio, produtora audiovisual em São Paulo. Reels, cobertura de eventos, roteiro, motion com IA e estratégia de Instagram para negócios locais.">
+<meta name="theme-color" content="#0B0D0E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Bungee&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: mesma espinha da referência (hero em vídeo, seções numeradas, faixa de trabalhos, cases, divisão de responsabilidade, fundador, CTA). Mundo visual da Souna: pedra escura, amarelo-ouro em bloco 3D, couro e papel envelhecido. */
+:root{
+  --ink:#0B0D0E;
+  --stone:#131617;
+  --line:#262A2B;
+  --text:#F2EEE6;
+  --muted:#9C9A92;
+  --gold:#F2B71E;
+  --gold-deep:#7A4E00;
+  --paper:#D9C7A3;
+  --block:"Bungee","Archivo",system-ui,sans-serif;
+  --head:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --gutter:clamp(18px,5vw,64px);
+  --max:1200px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--ink)}
+body{background:var(--ink);color:var(--text);font-family:var(--head);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+h1,h2,h3{font-family:var(--head);font-weight:900;line-height:1;letter-spacing:-.03em;text-wrap:balance}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+.y{color:var(--gold)}
+.blocky{font-family:var(--block);font-weight:400;letter-spacing:.01em;color:var(--gold);text-shadow:0 1px 0 #C98F00,0 2px 0 #A87400,0 3px 0 #8A5E00,0 4px 0 var(--gold-deep),0 8px 18px rgba(0,0,0,.6)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:90;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ---------- Header ---------- */
+.top{position:fixed;inset:0 0 auto 0;z-index:60;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+.top.solid{background:rgba(11,13,14,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-color:var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;height:68px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand img{height:30px;width:auto}
+.brand .s{height:40px;width:auto}
+.top-r{display:flex;align-items:center;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:800;font-size:15px;border-radius:999px;padding:14px 24px;border:1px solid transparent;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s,color .2s;white-space:nowrap}
+.btn-y{background:var(--gold);color:#140E00;box-shadow:0 4px 0 var(--gold-deep),0 12px 28px -10px rgba(242,183,30,.6)}
+.btn-y:hover{transform:translateY(-2px);box-shadow:0 6px 0 var(--gold-deep),0 16px 32px -10px rgba(242,183,30,.7)}
+.btn-y:active{transform:translateY(2px);box-shadow:0 1px 0 var(--gold-deep)}
+.btn-o{border-color:rgba(255,255,255,.22);background:rgba(0,0,0,.25)}
+.btn-o:hover{border-color:var(--gold);color:var(--gold)}
+.btn-sm{padding:10px 16px;font-size:13px}
+.burger{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(0,0,0,.3);cursor:pointer;display:grid;place-items:center;position:relative;z-index:80}
+.burger i{display:block;width:18px;height:2px;background:currentColor;position:relative;transition:transform .3s,background .3s}
+.burger i::before,.burger i::after{content:"";position:absolute;left:0;width:18px;height:2px;background:currentColor;transition:transform .3s}
+.burger i::before{top:-6px}.burger i::after{top:6px}
+.menu-open .burger i{background:transparent}
+.menu-open .burger i::before{transform:translateY(6px) rotate(45deg)}
+.menu-open .burger i::after{transform:translateY(-6px) rotate(-45deg)}
+
+/* Menu em tela cheia, numerado */
+.overlay{position:fixed;inset:0;z-index:70;background:var(--ink) url(assets/souna-vertical.webp) center/cover no-repeat;display:flex;flex-direction:column;justify-content:center;opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+.overlay::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,13,14,.97) 30%,rgba(11,13,14,.75))}
+.menu-open .overlay{opacity:1;visibility:visible}
+.overlay ol{list-style:none;position:relative;max-width:var(--max);width:100%;margin:0 auto;padding:90px var(--gutter) 40px}
+.overlay li a{display:flex;align-items:baseline;gap:18px;padding:8px 0;font-family:var(--head);font-weight:900;font-size:clamp(34px,7vw,72px);letter-spacing:-.03em;line-height:1.05;transition:color .2s,transform .2s}
+.overlay li a small{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--gold);letter-spacing:.05em;min-width:26px}
+.overlay li a:hover{color:var(--gold);transform:translateX(8px)}
+.overlay .ov-foot{position:relative;max-width:var(--max);width:100%;margin:0 auto;padding:0 var(--gutter);display:flex;gap:18px;flex-wrap:wrap;color:var(--muted);font-size:14px}
+
+/* ---------- Sections ---------- */
+section{padding:clamp(80px,12vw,150px) 0;position:relative}
+.label{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
+.label b{color:var(--gold)}
+.label::after{content:"";height:1px;width:56px;background:var(--line)}
+.h2{font-size:clamp(36px,6.6vw,84px)}
+.lead{font-size:clamp(17px,2vw,21px);color:var(--muted);max-width:58ch;margin-top:24px}
+.lead strong{color:var(--text);font-weight:700}
+.bt{border-top:1px solid var(--line)}
+.stone{background:var(--stone)}
+
+/* ---------- 01 Hero ---------- */
+.hero{min-height:min(100svh,920px);padding:120px 0 64px;display:flex;align-items:flex-end;overflow:hidden;isolation:isolate}
+.hero video,.hero .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%;z-index:-2}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(11,13,14,.55) 0%,rgba(11,13,14,.15) 35%,rgba(11,13,14,.72) 68%,var(--ink) 100%)}
+.hero .wrap{width:100%}
+.tc{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:.06em;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:7px 12px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);font-variant-numeric:tabular-nums}
+.tc i{width:9px;height:9px;border-radius:50%;background:#E5483B;animation:blink 1.2s infinite}
+@keyframes blink{50%{opacity:.2}}
+.hero h1{margin-top:22px}
+.hero-h1{font-size:clamp(42px,8vw,104px);max-width:13ch;text-shadow:0 6px 30px rgba(0,0,0,.7)}
+.hero-sub{font-size:clamp(17px,2.1vw,21px);color:#D6D2C8;max-width:52ch;margin-top:18px}
+.hero-sub strong{color:#fff}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.play{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--gold);color:#140E00}
+.play svg{width:9px;height:9px;margin-left:1px}
+
+/* ---------- Ticker ---------- */
+.ticker{border-block:1px solid var(--line);overflow:hidden;padding:16px 0;background:var(--stone)}
+.ticker-track{display:flex;width:max-content;animation:tick 30s linear infinite}
+.ticker.rev .ticker-track{animation-direction:reverse}
+.ticker span{font-family:var(--block);font-size:clamp(20px,3vw,30px);white-space:nowrap;display:flex;align-items:center;gap:34px;padding-right:34px;color:var(--text)}
+.ticker span::after{content:"";width:12px;height:12px;background:var(--gold);transform:rotate(45deg);box-shadow:2px 2px 0 var(--gold-deep)}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* ---------- 02 Realidade + telefone ---------- */
+.two{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(40px,6vw,90px);align-items:center}
+.test{list-style:none;margin-top:36px;display:grid;gap:12px;counter-reset:t}
+.test li{display:grid;grid-template-columns:48px 1fr;gap:14px;align-items:center;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--stone);color:var(--muted)}
+.test li b{color:var(--text)}
+.test li::before{counter-increment:t;content:counter(t,decimal-leading-zero);font-family:var(--mono);font-weight:700;color:var(--gold);font-size:15px}
+.phone{width:min(330px,100%);margin:0 auto;border-radius:46px;padding:11px;background:linear-gradient(155deg,#2a2d2e,#0a0b0c);box-shadow:0 50px 90px -30px #000,0 0 0 1px #3a3e3f inset}
+.screen{border-radius:36px;overflow:hidden;background:#000;aspect-ratio:9/19}
+.ig-top{display:flex;justify-content:space-between;align-items:center;padding:16px 16px 6px;font-size:13px;font-weight:800}
+.ig-head{display:flex;gap:16px;align-items:center;padding:8px 16px}
+.ig-av{width:70px;height:70px;border-radius:50%;padding:3px;background:conic-gradient(var(--gold),#E5483B,var(--gold));flex:none}
+.ig-av div{width:100%;height:100%;border-radius:50%;background:#0b0d0e;display:grid;place-items:center;border:2px solid #000}
+.ig-av img{width:70%}
+.ig-stats{display:flex;gap:14px;font-size:11px;color:#aaa;text-align:center}
+.ig-stats b{display:block;color:#fff;font-size:14px}
+.ig-bio{padding:6px 16px 10px;font-size:11.5px;line-height:1.45;color:#ddd}
+.ig-bio b{color:#fff}
+.ig-hl{display:flex;gap:12px;padding:4px 16px 12px;overflow:hidden}
+.ig-hl figure{display:grid;gap:4px;justify-items:center;font-size:10px;color:#ddd}
+.ig-hl img{width:54px;height:54px;border-radius:50%;object-fit:cover;border:2px solid #333}
+.ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.ig-grid > *{aspect-ratio:4/5;background:#151819;overflow:hidden}
+.ig-grid img{width:100%;height:100%;object-fit:cover}
+.ig-grid .blk{display:grid;place-items:center;background:radial-gradient(circle at 50% 40%,#1d2223,#0b0d0e)}
+.ig-grid .blk span{font-family:var(--block);color:var(--gold);font-size:13px;text-shadow:0 2px 0 var(--gold-deep)}
+.cap{text-align:center;font-size:13px;color:var(--muted);margin-top:16px}
+
+/* ---------- 03 Decisão (3 erros) ---------- */
+.errs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:56px}
+.errs article{border:1px solid var(--line);border-radius:22px;padding:30px;background:var(--ink);display:flex;flex-direction:column;gap:14px}
+.errs .x{font-family:var(--block);font-size:46px;line-height:1;color:var(--gold);text-shadow:0 3px 0 var(--gold-deep)}
+.errs h3{font-size:24px;letter-spacing:-.02em;line-height:1.1}
+.errs p{color:var(--muted);font-size:15.5px}
+
+/* ---------- 04 Estratégia (nove funções) ---------- */
+.roles{display:flex;flex-wrap:wrap;gap:10px;margin-top:44px}
+.roles span{font-weight:700;font-size:clamp(15px,1.8vw,18px);border:1px solid var(--line);border-radius:999px;padding:10px 18px;color:#cfcac0}
+.roles span.on{background:var(--gold);color:#140E00;border-color:var(--gold);box-shadow:0 3px 0 var(--gold-deep)}
+.after{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,6vw,90px);margin-top:clamp(70px,9vw,110px);align-items:start}
+.qs{list-style:none;display:grid;gap:0;border-top:1px solid var(--line)}
+.qs li{display:grid;grid-template-columns:40px 1fr;gap:14px;padding:20px 0;border-bottom:1px solid var(--line);font-size:clamp(17px,2vw,20px);font-weight:700;line-height:1.3}
+.qs li i{font-style:normal;font-family:var(--mono);font-size:13px;color:var(--gold);padding-top:4px}
+
+/* ---------- 05 Processo ---------- */
+.proc-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(36px,6vw,80px);margin-top:56px;align-items:start}
+.proc-img{border-radius:24px;overflow:hidden;border:1px solid var(--line);position:sticky;top:90px}
+.proc{list-style:none;display:grid;gap:0;border-top:1px solid var(--line)}
+.proc li{display:grid;grid-template-columns:72px 1fr;gap:18px;padding:26px 0;border-bottom:1px solid var(--line)}
+.proc .n{font-family:var(--block);font-size:44px;line-height:1;color:var(--gold);text-shadow:0 3px 0 var(--gold-deep)}
+.proc h3{font-size:24px;letter-spacing:-.02em}
+.proc p{color:var(--muted);margin-top:6px;font-size:15.5px}
+.proc-note{margin-top:36px;font-weight:900;font-size:clamp(22px,3vw,34px);letter-spacing:-.02em;line-height:1.15;max-width:26ch}
+
+/* ---------- 06 Já aconteceu (faixa) ---------- */
+.strip-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap}
+.arrows{display:flex;gap:8px}
+.arrows button{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:var(--stone);cursor:pointer;display:grid;place-items:center}
+.arrows button:hover{border-color:var(--gold);color:var(--gold)}
+.arrows svg{width:18px;height:18px}
+.strip{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:40px var(--gutter) 24px;scroll-padding:var(--gutter);scrollbar-width:none;cursor:grab}
+.strip::-webkit-scrollbar{display:none}
+.strip.drag{cursor:grabbing;scroll-snap-type:none}
+.card{flex:0 0 clamp(230px,24vw,290px);scroll-snap-align:start;display:flex;flex-direction:column;gap:12px}
+.card .media{aspect-ratio:9/16;border-radius:20px;overflow:hidden;position:relative;border:1px solid rgba(255,255,255,.07);background:var(--stone) url(assets/tex-a.webp) center/cover;isolation:isolate}
+.card:nth-child(even) .media{background-image:url(assets/tex-b.webp)}
+.card .media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.05) 40%,rgba(0,0,0,.6));z-index:0}
+.card .media video,.card .media > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.card .media .name{position:absolute;inset:auto 14px 50% 14px;transform:translateY(50%);text-align:center;font-family:var(--block);font-size:clamp(24px,2.6vw,30px);line-height:1.02;color:var(--c,var(--gold));text-shadow:0 2px 0 rgba(0,0,0,.5),0 4px 0 rgba(0,0,0,.35),0 10px 24px #000;z-index:1;text-wrap:balance}
+.card .media .tag{position:absolute;left:12px;top:12px;z-index:1;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.15);border-radius:6px;padding:5px 8px}
+.card .media .tint{position:absolute;inset:0;background:var(--tint,transparent);mix-blend-mode:color;opacity:.55;z-index:0}
+.card figcaption{font-weight:800;font-size:16px;line-height:1.25}
+.card figcaption span{display:block;font-weight:500;color:var(--muted);font-size:14px;margin-top:3px}
+
+/* ---------- 07 Serviços ---------- */
+.svc{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:56px}
+.svc a{border:1px solid var(--line);border-radius:24px;padding:clamp(26px,3.4vw,40px);background:var(--stone);display:flex;flex-direction:column;gap:14px;min-height:300px;transition:border-color .25s,transform .25s;position:relative;overflow:hidden}
+.svc a:hover{border-color:#6b5310;transform:translateY(-4px)}
+.svc .k{font-family:var(--mono);font-size:12.5px;font-weight:700;color:var(--gold);letter-spacing:.08em}
+.svc h3{font-size:clamp(30px,3.6vw,44px)}
+.svc p{color:var(--muted);max-width:44ch}
+.svc .t{margin-top:auto;font-weight:700;font-size:14px;color:#cfcac0}
+.svc .go{position:absolute;right:24px;top:24px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:background .2s,color .2s}
+.svc a:hover .go{background:var(--gold);color:#140E00;border-color:var(--gold)}
+.svc .go svg{width:16px;height:16px}
+
+/* ---------- 08 Cases ---------- */
+.feat{display:grid;grid-template-columns:.9fr 1.1fr;border:1px solid var(--line);border-radius:28px;overflow:hidden;margin-top:56px;background:var(--stone)}
+.feat-media{position:relative;min-height:420px;background:#000}
+.feat-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.feat-media.card{display:block;gap:0}
+.feat-body{padding:clamp(28px,4vw,52px);display:flex;flex-direction:column;gap:18px}
+.feat-body .who{font-family:var(--mono);font-size:12.5px;font-weight:700;letter-spacing:.08em;color:var(--gold);text-transform:uppercase}
+.feat-body h3{font-size:clamp(30px,3.8vw,48px)}
+.feat-body p{color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:auto}
+.stats div{border:1px solid var(--line);border-radius:16px;padding:16px;background:var(--ink)}
+.stats b{display:block;font-family:var(--block);font-weight:400;font-size:clamp(26px,3.2vw,38px);line-height:1;color:var(--gold);text-shadow:0 3px 0 var(--gold-deep);font-variant-numeric:tabular-nums}
+.stats span{display:block;font-size:13px;color:var(--muted);margin-top:8px;line-height:1.35}
+.clist{list-style:none;margin-top:20px;border-top:1px solid var(--line)}
+.clist li{display:grid;grid-template-columns:70px 1fr 1.5fr auto;gap:20px;align-items:center;padding:26px 0;border-bottom:1px solid var(--line);transition:background .2s}
+.clist li:hover{background:rgba(242,183,30,.04)}
+.clist .i{font-family:var(--mono);font-weight:700;color:var(--gold)}
+.clist h4{font-size:clamp(21px,2.4vw,28px);font-weight:900;letter-spacing:-.02em;line-height:1.05}
+.clist h4 small{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-top:5px;letter-spacing:0}
+.clist p{color:var(--muted);font-size:15.5px}
+.clist .pill{font-size:12.5px;font-weight:700;border:1px solid var(--line);border-radius:999px;padding:7px 13px;white-space:nowrap}
+
+/* ---------- 09 Divisão ---------- */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:56px}
+.split > div{border:1px solid var(--line);border-radius:24px;padding:clamp(26px,3.6vw,44px)}
+.split .us{background:linear-gradient(160deg,#2a2208,#131617 70%);border-color:#5e4a10}
+.split h3{font-size:clamp(26px,3vw,36px);margin-bottom:20px}
+.split ul{list-style:none;display:grid;gap:14px}
+.split li{display:grid;grid-template-columns:24px 1fr;gap:12px;color:var(--muted);font-size:16.5px}
+.split .us li{color:var(--text)}
+.split svg{width:20px;height:20px;margin-top:3px}
+.pull{margin-top:56px;padding-left:clamp(18px,3vw,32px);border-left:4px solid var(--gold);font-weight:900;font-size:clamp(24px,3.6vw,44px);letter-spacing:-.02em;line-height:1.12;max-width:26ch}
+
+/* ---------- 10 Fundador ---------- */
+.founder{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(36px,6vw,90px);align-items:center}
+.ph{aspect-ratio:4/5;border-radius:26px;overflow:hidden;border:1px solid var(--line);position:relative;background:#000}
+.ph img{width:100%;height:100%;object-fit:cover}
+.ph .note{position:absolute;left:14px;bottom:14px;font-family:var(--mono);font-size:11.5px;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.15);padding:6px 10px;border-radius:6px;color:#ddd}
+.founder p{color:var(--muted);margin-top:18px;max-width:56ch;font-size:17px}
+.founder p strong{color:var(--text)}
+.logos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:22px;overflow:hidden;margin-top:clamp(64px,9vw,100px)}
+.logos div{background:var(--ink);min-height:104px;display:grid;place-items:center;text-align:center;padding:16px;font-weight:800;font-size:15px;line-height:1.2;color:#bdb8ad;transition:color .2s,background .2s}
+.logos div:hover{color:var(--gold);background:#101314}
+
+/* ---------- 11 CTA ---------- */
+.final{overflow:hidden;isolation:isolate}
+.final::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,var(--ink) 35%,rgba(11,13,14,.55)),url(assets/sstudio.webp) right center/cover no-repeat;opacity:.9}
+.final .h2{max-width:14ch}
+.final .slog{width:clamp(170px,22vw,260px);margin-top:40px;opacity:.95}
+
+/* ---------- Footer ---------- */
+footer{border-top:1px solid var(--line);padding:60px 0 34px;background:#070809}
+.foot{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:34px}
+.foot h4{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.foot p,.foot a{color:var(--muted);font-size:15px;display:block;line-height:1.85}
+.foot a:hover{color:var(--gold)}
+.foot .fl{width:170px}
+.foot .tag{font-weight:900;font-size:22px;letter-spacing:-.02em;color:var(--text);margin-top:16px;line-height:1.15}
+.legal{margin-top:46px;padding-top:22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:#6b6a64}
+
+
+/* ---------- Planos ---------- */
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:56px}
+.plan{border:1px solid var(--line);border-radius:24px;padding:clamp(24px,3vw,34px);background:var(--ink);display:flex;flex-direction:column;gap:14px}
+.plan.hi{border-color:#6b5310;background:linear-gradient(170deg,#2a2208,#0B0D0E 65%)}
+.plan .who{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.plan h3{font-size:clamp(26px,3vw,34px)}
+.plan > p{color:var(--muted);font-size:15.5px}
+.plan dl{display:grid;gap:0;border-top:1px solid var(--line);margin-top:auto}
+.plan dl div{padding:12px 0;border-bottom:1px solid var(--line)}
+.plan dt{font-family:var(--block);font-size:16px;color:var(--text)}
+.plan dd{color:var(--muted);font-size:14px;line-height:1.45;margin-top:2px}
+.plans-note{margin-top:24px;color:var(--muted);font-size:15px;max-width:70ch}
+.area{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.area div{border:1px solid var(--line);border-radius:20px;padding:22px 24px;background:var(--ink)}
+.area b{display:block;font-family:var(--block);font-size:clamp(20px,2.6vw,28px);color:var(--gold);text-shadow:0 2px 0 var(--gold-deep)}
+.area span{color:var(--muted);font-size:15px;display:block;margin-top:6px}
+@media (max-width:920px){.plans,.area{grid-template-columns:1fr}}
+
+
+.card .media{display:block;width:100%;padding:0;cursor:pointer;font:inherit;color:inherit;text-align:left}
+.card .pl{position:absolute;right:12px;bottom:12px;z-index:2;width:42px;height:42px;border-radius:50%;background:var(--gold);color:#140E00;display:grid;place-items:center;box-shadow:0 3px 0 var(--gold-deep);transition:transform .2s}
+.card .pl svg{width:16px;height:16px;margin-left:2px}
+.card .media:hover .pl{transform:scale(1.1)}
+.card .media video{z-index:0}
+/* Lightbox */
+.lb{position:fixed;inset:0;z-index:100;background:rgba(5,6,7,.94);display:none;align-items:center;justify-content:center;padding:20px}
+.lb.on{display:flex}
+.lb video{max-height:86vh;max-width:min(92vw,1100px);border-radius:16px;background:#000;box-shadow:0 30px 80px #000}
+.lb .x{position:absolute;top:16px;right:16px;width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.5);cursor:pointer;font-size:22px;display:grid;place-items:center}
+.lb p{position:absolute;left:0;right:0;bottom:14px;text-align:center;font-weight:800;color:#ddd}
+.hero-now{position:absolute;right:var(--gutter);bottom:28px;z-index:2;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#cfcac0;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:6px 10px}
+.hero-now b{color:var(--gold)}
+.hero video{transition:opacity .45s}
+.hero video.fade{opacity:0}
+@media (max-width:560px){.hero-now{top:84px;bottom:auto;right:auto;left:var(--gutter)}.hero .tc{margin-top:28px}}
+
+
+/* Celular com o perfil real do Instagram (modo claro) */
+.igp{width:min(340px,100%);margin:0 auto;border-radius:50px;padding:10px;background:linear-gradient(155deg,#3a3d3f,#0d0e0f);box-shadow:0 50px 90px -30px #000,0 0 0 1px #4a4e50 inset}
+.igp-screen{border-radius:40px;overflow:hidden;background:#fff;color:#000;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;height:680px;overflow-y:auto;scrollbar-width:none}
+.igp-screen::-webkit-scrollbar{display:none}
+.igp-screen a{color:inherit}
+.igp-status{display:flex;justify-content:space-between;padding:12px 26px 4px;font-size:13px;font-weight:600}
+.igp-status span{font-size:9px;letter-spacing:1px}
+.igp-bar{display:flex;align-items:center;justify-content:space-between;padding:6px 12px 8px}
+.igp-bar svg{width:20px;height:20px}
+.igp-bar b{font-size:15px;font-weight:700}
+.igp-head{display:flex;gap:14px;align-items:center;padding:4px 14px 8px}
+.igp-av{flex:none;width:78px;height:78px;border-radius:50%;padding:3px;background:linear-gradient(45deg,#f9ce34,#ee2a7b,#6228d7)}
+.igp-av img{width:100%;height:100%;border-radius:50%;border:2.5px solid #fff;object-fit:cover;background:#fff}
+.igp-right{min-width:0;flex:1}
+.igp-name{display:block;font-size:13.5px;font-weight:700;line-height:1.2;margin-bottom:6px}
+.igp-stats{display:flex;justify-content:space-between;font-size:11.5px;line-height:1.2;color:#000}
+.igp-stats b{display:block;font-size:15px;font-weight:700}
+.igp-bio{padding:0 14px;font-size:12.5px;line-height:1.38}
+.igp-bio .cat{display:block;color:#737373}
+.igp-bio .lk{display:flex;width:max-content;gap:4px;align-items:center;color:#00376b!important;font-weight:600;margin-top:2px}
+.igp-bio .lk svg{width:13px;height:13px}
+.igp-btns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;padding:12px 14px 6px}
+.igp-btns a{background:#efefef;border-radius:8px;text-align:center;font-size:12.5px;font-weight:600;padding:7px 0}
+.igp-btns a.pri{background:#0095f6;color:#fff!important}
+.igp-hls{display:flex;gap:12px;padding:10px 12px 12px;overflow-x:auto;scrollbar-width:none}
+.igp-hl{display:grid;justify-items:center;gap:5px;font-size:10.5px;flex:none;width:64px;text-align:center}
+.igp-hl span{width:62px;height:62px;border-radius:50%;padding:2px;border:1.5px solid #dbdbdb;display:block}
+.igp-hl img{width:100%;height:100%;border-radius:50%}
+.igp-tabs{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #efefef}
+.igp-tabs span{display:grid;place-items:center;padding:9px 0;opacity:.45}
+.igp-tabs span.on{opacity:1;border-bottom:1.5px solid #000}
+.igp-tabs svg{width:20px;height:20px}
+.igp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px}
+.igp-grid a{position:relative;aspect-ratio:4/5;overflow:hidden;background:#eee;display:block}
+.igp-grid img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.igp-grid a:hover img{transform:scale(1.05)}
+.igp-grid .r{position:absolute;right:5px;top:5px;width:15px;height:15px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.6))}
+
+
+.dnav{display:none;gap:28px;font-weight:700;font-size:14.5px}
+.dnav a{color:#d6d2c8;transition:color .2s}
+.dnav a:hover{color:var(--gold)}
+@media (min-width:1000px){.dnav{display:flex}.hero-h1{font-size:clamp(64px,7vw,112px)}}
+
+/* ---------- Responsivo ---------- */
+@media (max-width:920px){
+  .two,.after,.proc-grid,.feat,.split,.founder{grid-template-columns:1fr}
+  .errs,.svc{grid-template-columns:1fr}
+  .proc-img{position:relative;top:0;max-width:420px}
+  .logos{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .foot{grid-template-columns:1fr 1fr}
+  .clist li{grid-template-columns:44px 1fr;gap:6px 14px}
+  .clist li p,.clist li .pill{grid-column:2}
+  .clist li .pill{justify-self:start;margin-top:8px}
+  .feat-media{min-height:0;aspect-ratio:9/12}
+}
+@media (max-width:560px){
+  .top-r .btn{display:none}
+  .stats{gap:8px}.stats div{padding:12px}
+  .logos{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .foot{grid-template-columns:1fr}
+  .cta-row .btn{flex:1 1 100%}
+  .proc li{grid-template-columns:56px 1fr}
+  .proc .n{font-size:36px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio" aria-label="Souna Studio, início"><img class="s" src="assets/s-brush.png" alt="Souna"></a>
+    <nav class="dnav" aria-label="Seções"><a href="#servicos">Serviços</a><a href="#trabalhos">Trabalhos</a><a href="#planos">Planos</a><a href="#cases">Cases</a><a href="#contato">Contato</a></nav>
+    <div class="top-r">
+      <a class="btn btn-y btn-sm js-contact" href="https://www.instagram.com/souna.studio/">Quero meu orçamento</a>
+      <button class="burger" id="burger" aria-expanded="false" aria-controls="overlay" aria-label="Abrir menu"><i></i></button>
+    </div>
+  </div>
+</header>
+
+<nav class="overlay" id="overlay" aria-label="Menu">
+  <ol>
+    <li><a href="#inicio"><small>01</small>Início</a></li>
+    <li><a href="#audiovisual"><small>02</small>Audiovisual</a></li>
+    <li><a href="#roteiro"><small>03</small>Roteiro</a></li>
+    <li><a href="#motion"><small>04</small>Motion &amp; IA</a></li>
+    <li><a href="#estrategia"><small>05</small>Estratégia</a></li>
+    <li><a href="#planos"><small>06</small>Planos</a></li>
+    <li><a href="#cases"><small>07</small>Cases</a></li>
+    <li><a href="#contato"><small>08</small>Contato</a></li>
+  </ol>
+  <div class="ov-foot"><span>@souna.studio</span><span>WhatsApp (11) 92646-6766</span><span>Atendimento das 11h às 22h</span></div>
+</nav>
+
+<main>
+<!-- 01 HERO -->
+<section class="hero" id="inicio">
+  <img class="poster" src="assets/hero-poster.jpg" alt="">
+  <video id="heroVid" src="assets/hero.mp4" poster="assets/hero-poster.jpg" autoplay muted playsinline preload="auto" aria-hidden="true"></video>
+  <span class="hero-now" aria-hidden="true"><b id="hnI">01</b>/<span id="hnT">09</span> · <span id="hnN">Souna</span></span>
+  <div class="wrap">
+    <span class="tc" aria-hidden="true"><i></i>REC <span id="tc">00:00:00:00</span></span>
+    <h1 class="hero-h1">Vídeo que faz o seu negócio <span class="y">ser lembrado.</span></h1>
+    <p class="hero-sub">Produtora audiovisual. <strong>Reels, cobertura de eventos, roteiro, motion com IA e estratégia de Instagram</strong> para negócios de São Paulo e Santo André.</p>
+    <div class="cta-row">
+      <a class="btn btn-y js-contact" href="https://www.instagram.com/souna.studio/">Quero meu orçamento
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn-o" href="#reel"><span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4v16l14-8z"/></svg></span>Assistir o reel</a>
+    </div>
+  </div>
+</section>
+
+<!-- 02 REALIDADE -->
+<section id="realidade">
+  <div class="wrap two">
+    <div>
+      <p class="label"><b>02</b>A real</p>
+      <h2 class="h2">Todo mundo posta. <span class="y">Dá pra saber que esse feed é seu?</span></h2>
+      <p class="lead">Estar no Instagram virou o mínimo. O que separa uma marca das outras é o cliente <strong>reconhecer você antes de ler o nome</strong>. Faz o teste no seu celular:</p>
+      <ol class="test">
+        <li><span><b>Abra o seu perfil</b> como se fosse um cliente novo.</span></li>
+        <li><span><b>Role o feed</b> até o nome sumir da tela.</span></li>
+        <li><span><b>Só pelos posts</b>, dá pra saber que é você? Se ficou na dúvida, a gente começa por aí.</span></li>
+      </ol>
+    </div>
+    <div>
+      <div class="igp" aria-label="Perfil da Souna no Instagram">
+        <div class="igp-screen">
+          <div class="igp-status"><b>9:41</b><span>●●●● ▮</span></div>
+          <div class="igp-bar"><svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg><b>souna.studio</b><svg viewBox="0 0 24 24" fill="#000"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></div>
+          <div class="igp-head">
+            <a class="igp-av" href="https://www.instagram.com/souna.studio/" aria-label="Abrir @souna.studio no Instagram"><img src="assets/ig-avatar.png" alt="Foto de perfil da Souna"></a>
+            <div class="igp-right">
+              <b class="igp-name">Souna | Audiovisual Production</b>
+              <div class="igp-stats"><div><b>29</b>posts</div><div><b>1.034</b>seguidores</div><div><b>128</b>seguindo</div></div>
+            </div>
+          </div>
+          <div class="igp-bio">
+            <span class="cat">Fotografia e videografia</span>
+            🎬 Conteúdo que atrai clientes<br>Vídeo + Foto para marcas e criadores<br>Crescimento através do digital<br>📍 SP | Fale conosco ⬇️
+            <a class="lk" href="https://wa.me/5511926466766"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>wa.me/5511926466766</a>
+          </div>
+          <div class="igp-btns"><a href="https://www.instagram.com/souna.studio/" class="pri">Seguir</a><a href="https://www.instagram.com/souna.studio/">Mensagem</a><a href="https://wa.me/5511926466766">WhatsApp</a></div>
+          <div class="igp-hls"><a href="https://www.instagram.com/souna.studio/" class="igp-hl"><span><img src="assets/hl-parcerias.png" alt=""></span>PARCERIAS</a><a href="https://www.instagram.com/souna.studio/" class="igp-hl"><span><img src="assets/hl-feedbacks.png" alt=""></span>FEEDBACKS</a><a href="https://www.instagram.com/souna.studio/" class="igp-hl"><span><img src="assets/hl-bastidores.png" alt=""></span>BASTIDORES</a><a href="https://www.instagram.com/souna.studio/" class="igp-hl"><span><img src="assets/hl-edicoes.png" alt=""></span>EDIÇÕES</a></div>
+          <div class="igp-tabs"><span class="on"><svg viewBox="0 0 24 24" fill="#000"><path d="M3 3h5v5H3zM9.5 3h5v5h-5zM16 3h5v5h-5zM3 9.5h5v5H3zM9.5 9.5h5v5h-5zM16 9.5h5v5h-5zM3 16h5v5H3zM9.5 16h5v5h-5zM16 16h5v5h-5z"/></svg></span><span><svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M10 8.5v7l6-3.5z" fill="#000"/></svg></span><span><svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="4"/><circle cx="12" cy="11" r="3"/><path d="M7 20c1-3 9-3 10 0"/></svg></span></div>
+          <div class="igp-grid"><a href="https://www.instagram.com/souna.studio/" aria-label="Ver Post da Souna no Instagram"><img src="assets/ig-post1.jpg" alt="" loading="lazy"></a><a href="https://www.instagram.com/souna.studio/" aria-label="Ver Post da Souna no Instagram"><img src="assets/ig-post2.jpg" alt="" loading="lazy"></a><a href="https://www.instagram.com/souna.studio/" aria-label="Ver Post da Souna no Instagram"><img src="assets/ig-post3.jpg" alt="" loading="lazy"></a><a href="https://www.instagram.com/souna.studio/" aria-label="Ver Nova Passos no Instagram"><img src="assets/v12.jpg" alt="" loading="lazy"><svg class="r" viewBox="0 0 24 24" fill="#fff"><path d="M4 4h16v16H4z" fill="none" stroke="#fff" stroke-width="2" rx="4"/><path d="M10 8.5v7l6-3.5z"/></svg></a><a href="https://www.instagram.com/souna.studio/" aria-label="Ver Nova Point no Instagram"><img src="assets/v06.jpg" alt="" loading="lazy"><svg class="r" viewBox="0 0 24 24" fill="#fff"><path d="M4 4h16v16H4z" fill="none" stroke="#fff" stroke-width="2" rx="4"/><path d="M10 8.5v7l6-3.5z"/></svg></a><a href="https://www.instagram.com/souna.studio/" aria-label="Ver Óticas King no Instagram"><img src="assets/v05.jpg" alt="" loading="lazy"><svg class="r" viewBox="0 0 24 24" fill="#fff"><path d="M4 4h16v16H4z" fill="none" stroke="#fff" stroke-width="2" rx="4"/><path d="M10 8.5v7l6-3.5z"/></svg></a><a href="https://www.instagram.com/souna.studio/" aria-label="Ver Jardim dos Perfumes no Instagram"><img src="assets/v02.jpg" alt="" loading="lazy"><svg class="r" viewBox="0 0 24 24" fill="#fff"><path d="M4 4h16v16H4z" fill="none" stroke="#fff" stroke-width="2" rx="4"/><path d="M10 8.5v7l6-3.5z"/></svg></a><a href="https://www.instagram.com/souna.studio/" aria-label="Ver Barbearia Gabal no Instagram"><img src="assets/v14.jpg" alt="" loading="lazy"><svg class="r" viewBox="0 0 24 24" fill="#fff"><path d="M4 4h16v16H4z" fill="none" stroke="#fff" stroke-width="2" rx="4"/><path d="M10 8.5v7l6-3.5z"/></svg></a><a href="https://www.instagram.com/souna.studio/" aria-label="Ver Pizzaria no Instagram"><img src="assets/v13.jpg" alt="" loading="lazy"><svg class="r" viewBox="0 0 24 24" fill="#fff"><path d="M4 4h16v16H4z" fill="none" stroke="#fff" stroke-width="2" rx="4"/><path d="M10 8.5v7l6-3.5z"/></svg></a></div>
+        </div>
+      </div>
+      <p class="cap">Toque no perfil para abrir o @souna.studio no Instagram.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 03 DECISÃO -->
+<section class="stone bt" id="decisao">
+  <div class="wrap">
+    <p class="label"><b>03</b>Decisão</p>
+    <h2 class="h2">Vídeo genérico sempre vem <span class="y">destes três erros.</span></h2>
+    <div class="errs">
+      <article><span class="x">01</span><h3>Gravar sem roteiro</h3><p>Chegar no dia, apontar a câmera e ver o que sai. O resultado é bonito e esquecível.</p></article>
+      <article><span class="x">02</span><h3>Falar de você, não do cliente</h3><p>"Somos referência", "qualidade e tradição". O cliente quer saber o que ganha vindo até você.</p></article>
+      <article><span class="x">03</span><h3>Contar curtida, não cliente</h3><p>Curtida não paga conta. O vídeo precisa trazer gente pro seu balcão, pro seu direct, pra sua agenda.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- 04 ESTRATÉGIA -->
+<section id="estrategia">
+  <div class="wrap">
+    <p class="label"><b>04</b>Estratégia</p>
+    <h2 class="h2">Quem cuida do seu Instagram <span class="y">acumula nove funções.</span></h2>
+    <div class="roles" aria-label="Funções">
+      <span>Roteiro</span><span>Câmera</span><span>Edição</span><span>Design</span><span>Motion</span><span>Fotografia</span><span>Legenda</span><span>Atendimento</span><span>Direção</span><span class="on">+ Estrategista</span>
+    </div>
+    <div class="after">
+      <div>
+        <h3 class="h2" style="font-size:clamp(30px,4.4vw,54px)">Por isso a Souna começa pelo roteiro. <span class="y">O vídeo vem depois.</span></h3>
+        <p class="lead">Template e IA fazem muita coisa. Entender o seu negócio e decidir o que gravar ainda é trabalho de gente. Antes de ligar a câmera, a gente responde quatro perguntas com você:</p>
+      </div>
+      <ol class="qs">
+        <li><i>01</i>Quem é o cliente que você quer atrair no seu bairro?</li>
+        <li><i>02</i>Por que ele compraria de você, e por que agora?</li>
+        <li><i>03</i>Quem aparece na frente da câmera?</li>
+        <li><i>04</i>Qual é o único objetivo deste vídeo?</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- 05 PROCESSO -->
+<section class="stone bt" id="processo">
+  <div class="wrap">
+    <p class="label"><b>05</b>Processo</p>
+    <h2 class="h2">Com o plano definido, <span class="y">a gente produz.</span></h2>
+    <div class="proc-grid">
+      <img class="proc-img" src="assets/bastidores.webp" alt="Arte Bastidores da Souna: câmera no gimbal, carteira de couro, baú e etiqueta sobre pedra escura">
+      <ol class="proc">
+        <li><span class="n">1</span><div><h3>Conversa</h3><p>Entendemos o seu negócio, quem compra de você e o que precisa acontecer.</p></div></li>
+        <li><span class="n">2</span><div><h3>Raio-X do perfil</h3><p>Foto, bio, destaques, links e feed: o que ajuda e o que atrapalha.</p></div></li>
+        <li><span class="n">3</span><div><h3>Roteiro em PDF</h3><p>Cada vídeo numerado, com a referência clicável do Instagram. Aprovou, gravamos.</p></div></li>
+        <li><span class="n">4</span><div><h3>Gravação</h3><p>Diária no seu ponto ou cobertura do seu evento, com câmera, gimbal e direção de cena.</p></div></li>
+        <li><span class="n">5</span><div><h3>Edição &amp; motion</h3><p>Corte, legenda, trilha, cor e, quando faz sentido, animação com IA.</p></div></li>
+        <li><span class="n">6</span><div><h3>Postagem guiada</h3><p>Entregamos com a orientação de como, quando e com qual legenda postar.</p></div></li>
+      </ol>
+    </div>
+    <p class="proc-note">O roteiro é o ponto de partida. <span class="y">Nunca chegamos no seu ponto sem saber o que gravar.</span></p>
+  </div>
+</section>
+
+<!-- 06 JÁ ACONTECEU -->
+<div class="ticker" aria-hidden="true"><div class="ticker-track">
+  <span>Reels</span><span>Cobertura de eventos</span><span>Roteiro</span><span>Motion &amp; IA</span><span>Estratégia</span><span>Diárias</span>
+  <span>Reels</span><span>Cobertura de eventos</span><span>Roteiro</span><span>Motion &amp; IA</span><span>Estratégia</span><span>Diárias</span>
+</div></div>
+<section id="trabalhos" style="padding-bottom:clamp(40px,6vw,70px)">
+  <div class="wrap">
+    <div class="strip-head">
+      <div>
+        <p class="label"><b>06</b>Feito aqui</p>
+        <h2 class="h2">Já <span class="y">aconteceu.</span></h2>
+      </div>
+      <div class="arrows">
+        <button type="button" id="prev" aria-label="Voltar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+        <button type="button" id="next" aria-label="Avançar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="strip" id="strip">
+    <figure class="card" id="reel"><button type="button" class="media js-open" data-src="assets/reel.mp4" data-title="Abertura Souna" aria-label="Assistir: Abertura Souna"><video src="assets/reel.mp4" poster="assets/hero-poster.jpg" muted loop playsinline preload="none"></video><span class="tag">Motion &amp; IA</span><span class="pl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></span></button><figcaption>Abertura Souna<span>Logo animada com IA</span></figcaption></figure>
+    <figure class="card"><button type="button" class="media js-open" data-src="assets/v09.mp4" data-title="Feito pela Souna" aria-label="Assistir: Feito pela Souna"><video src="assets/v09.mp4" poster="assets/v09.jpg" muted loop playsinline preload="none"></video><span class="tag">Showreel</span><span class="pl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></span></button><figcaption>Feito pela Souna<span>Bastidores e clientes</span></figcaption></figure>
+    <figure class="card"><button type="button" class="media js-open" data-src="assets/v12.mp4" data-title="Nova Passos Pizzas" aria-label="Assistir: Nova Passos Pizzas"><video src="assets/v12.mp4" poster="assets/v12.jpg" muted loop playsinline preload="none"></video><span class="tag">Reels</span><span class="pl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></span></button><figcaption>Nova Passos Pizzas<span>Os donos em cena</span></figcaption></figure>
+    <figure class="card"><button type="button" class="media js-open" data-src="assets/v13.mp4" data-title="Estamos abertos" aria-label="Assistir: Estamos abertos"><video src="assets/v13.mp4" poster="assets/v13.jpg" muted loop playsinline preload="none"></video><span class="tag">Motion</span><span class="pl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></span></button><figcaption>Estamos abertos<span>Pizzaria · chamada de horário</span></figcaption></figure>
+    <figure class="card"><button type="button" class="media js-open" data-src="assets/v01.mp4" data-title="Pizzaria Araújo" aria-label="Assistir: Pizzaria Araújo"><video src="assets/v01.mp4" poster="assets/v01.jpg" muted loop playsinline preload="none"></video><span class="tag">Produto</span><span class="pl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></span></button><figcaption>Pizzaria Araújo<span>Delivery · produto</span></figcaption></figure>
+    <figure class="card"><button type="button" class="media js-open" data-src="assets/v11.mp4" data-title="Do molho ao forno" aria-label="Assistir: Do molho ao forno"><video src="assets/v11.mp4" poster="assets/v11.jpg" muted loop playsinline preload="none"></video><span class="tag">Produto</span><span class="pl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></span></button><figcaption>Do molho ao forno<span>Pizzaria · produção</span></figcaption></figure>
+    <figure class="card"><button type="button" class="media js-open" data-src="assets/v07.mp4" data-title="Noite de delivery" aria-label="Assistir: Noite de delivery"><video src="assets/v07.mp4" poster="assets/v07.jpg" muted loop playsinline preload="none"></video><span class="tag">Bastidores</span><span class="pl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></span></button><figcaption>Noite de delivery<span>Pizzaria · equipe em cena</span></figcaption></figure>
+    <figure class="card"><button type="button" class="media js-open" data-src="assets/v06.mp4" data-title="Nova Point Pizza &amp; Esfiha" aria-label="Assistir: Nova Point Pizza &amp; Esfiha"><video src="assets/v06.mp4" poster="assets/v06.jpg" muted loop playsinline preload="none"></video><span class="tag">Reels</span><span class="pl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></span></button><figcaption>Nova Point Pizza &amp; Esfiha<span>Fachada, forno e equipe</span></figcaption></figure>
+    <figure class="card"><button type="button" class="media js-open" data-src="assets/v02.mp4" data-title="Jardim dos Perfumes" aria-label="Assistir: Jardim dos Perfumes"><video src="assets/v02.mp4" poster="assets/v02.jpg" muted loop playsinline preload="none"></video><span class="tag">Evento</span><span class="pl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></span></button><figcaption>Jardim dos Perfumes<span>Perfumaria árabe</span></figcaption></figure>
+    <figure class="card"><button type="button" class="media js-open" data-src="assets/v15.mp4" data-title="Jardim dos Perfumes" aria-label="Assistir: Jardim dos Perfumes"><video src="assets/v15.mp4" poster="assets/v15.jpg" muted loop playsinline preload="none"></video><span class="tag">Cobertura</span><span class="pl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></span></button><figcaption>Jardim dos Perfumes<span>Feira de beleza</span></figcaption></figure>
+    <figure class="card"><button type="button" class="media js-open" data-src="assets/v03.mp4" data-title="Perfumes em evento" aria-label="Assistir: Perfumes em evento"><video src="assets/v03.mp4" poster="assets/v03.jpg" muted loop playsinline preload="none"></video><span class="tag">Cobertura</span><span class="pl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></span></button><figcaption>Perfumes em evento<span>Experiência de fragrância</span></figcaption></figure>
+    <figure class="card"><button type="button" class="media js-open" data-src="assets/v05.mp4" data-title="Óticas King" aria-label="Assistir: Óticas King"><video src="assets/v05.mp4" poster="assets/v05.jpg" muted loop playsinline preload="none"></video><span class="tag">Reels</span><span class="pl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></span></button><figcaption>Óticas King<span>Filtro azul protege?</span></figcaption></figure>
+    <figure class="card"><button type="button" class="media js-open" data-src="assets/v10.mp4" data-title="Óticas King" aria-label="Assistir: Óticas King"><video src="assets/v10.mp4" poster="assets/v10.jpg" muted loop playsinline preload="none"></video><span class="tag">Trend</span><span class="pl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></span></button><figcaption>Óticas King<span>Onde fui, o que vesti, o que fiz</span></figcaption></figure>
+    <figure class="card"><button type="button" class="media js-open" data-src="assets/v08.mp4" data-title="Barbearia Gabal" aria-label="Assistir: Barbearia Gabal"><video src="assets/v08.mp4" poster="assets/v08.jpg" muted loop playsinline preload="none"></video><span class="tag">Reels</span><span class="pl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></span></button><figcaption>Barbearia Gabal<span>Corte e ferramentas</span></figcaption></figure>
+    <figure class="card"><button type="button" class="media js-open" data-src="assets/v14.mp4" data-title="Barbearia Gabal" aria-label="Assistir: Barbearia Gabal"><video src="assets/v14.mp4" poster="assets/v14.jpg" muted loop playsinline preload="none"></video><span class="tag">Reels</span><span class="pl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></span></button><figcaption>Barbearia Gabal<span>Detalhe do corte</span></figcaption></figure>
+    <figure class="card"><button type="button" class="media js-open" data-src="assets/v04.mp4" data-title="Grupo PD" aria-label="Assistir: Grupo PD"><video src="assets/v04.mp4" poster="assets/v04.jpg" muted loop playsinline preload="none"></video><span class="tag">Cobertura</span><span class="pl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></span></button><figcaption>Grupo PD<span>Evento no Parque Villa-Lobos</span></figcaption></figure>
+    <figure class="card"><button type="button" class="media js-open" data-src="assets/v16.mp4" data-title="Discotecando Histórias" aria-label="Assistir: Discotecando Histórias"><video src="assets/v16.mp4" poster="assets/v16.jpg" muted loop playsinline preload="none"></video><span class="tag">Criador</span><span class="pl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></span></button><figcaption>Discotecando Histórias<span>Cobertura de DJ</span></figcaption></figure>
+  </div>
+</section>
+<div class="ticker rev" aria-hidden="true"><div class="ticker-track">
+  <span>Sua História</span><span>Nossa Arte</span><span>Souna Studio</span><span>São Paulo</span>
+  <span>Sua História</span><span>Nossa Arte</span><span>Souna Studio</span><span>São Paulo</span>
+</div></div>
+
+<!-- 07 SERVIÇOS -->
+<section id="servicos">
+  <div class="wrap">
+    <p class="label"><b>07</b>Serviços</p>
+    <h2 class="h2">Do roteiro ao <span class="y">post no ar.</span></h2>
+    <div class="svc">
+      <a href="#contato" id="audiovisual"><span class="k">02 / AUDIOVISUAL</span><h3>Audiovisual</h3><p>Reels e stories gravados no seu ponto com câmera e celular, cortados para o vertical. Vídeos de 15 a 40 segundos com começo forte.</p><span class="t">Reels · Cobertura de eventos · Diárias</span><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></span></a>
+      <a href="#contato" id="roteiro"><span class="k">03 / ROTEIRO</span><h3>Roteiro</h3><p>PDF com a cara da sua marca: cada vídeo numerado e com a referência clicável do Instagram. Todo mundo chega no dia sabendo o que vai fazer.</p><span class="t">Roteiro em PDF · Referências · Direção no set</span><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></span></a>
+      <a href="#contato" id="motion"><span class="k">04 / MOTION &amp; IA</span><h3>Motion &amp; IA</h3><p>Logo animada, revelação de fachada, artes de time e chamadas de evento. Feito com IA de vídeo e imagem e com direção de arte nossa.</p><span class="t">Logo animada · Reveal · Artes com IA</span><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></span></a>
+      <a href="#contato"><span class="k">05 / ESTRATÉGIA</span><h3>Estratégia</h3><p>Análise do perfil inteiro (foto, bio, destaques, links, coerência do feed) e um calendário editorial com o que postar e por quê.</p><span class="t">Análise de perfil · Bio &amp; links · Calendário</span><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></span></a>
+    </div>
+  </div>
+</section>
+
+
+<!-- PLANOS -->
+<section class="stone bt" id="planos">
+  <div class="wrap">
+    <p class="label"><b>✦</b>Planos</p>
+    <h2 class="h2">Um plano para cada <span class="y">fase do negócio.</span></h2>
+    <p class="lead">Mensal, semanal ou por diária. Pagamento por <strong>Pix, cartão ou transferência</strong>, antes do início de cada mês, com contrato por escrito.</p>
+    <div class="plans">
+      <div class="plan">
+        <span class="who">Começando nas redes</span>
+        <h3>Primeiros passos</h3>
+        <p>Para quem está organizando o perfil agora: menos vídeos e mais acompanhamento.</p>
+        <dl>
+          <div><dt>Foundation</dt><dd>Análise e administração do perfil: logo, bio, estrutura, coerência e links funcionando.</dd></div>
+          <div><dt>Dominance</dt><dd>4 vídeos por mês, com estrutura e orientação de como postar cada um.</dd></div>
+          <div><dt>Start · Scale · Boost</dt><dd>Planos de entrada para pequenas empresas. O Start é para indicações de clientes Souna.</dd></div>
+        </dl>
+      </div>
+      <div class="plan hi">
+        <span class="who">Empresas</span>
+        <h3>Presença completa</h3>
+        <p>Produção mensal com roteiro, gravação, edição e direção de postagem.</p>
+        <dl>
+          <div><dt>Authority</dt><dd>Produção mensal para empresas que querem constância no perfil.</dd></div>
+          <div><dt>Empire</dt><dd>Mais volume de vídeos e acompanhamento mais de perto.</dd></div>
+          <div><dt>Legacy</dt><dd>O plano mais completo da Souna.</dd></div>
+        </dl>
+      </div>
+      <div class="plan">
+        <span class="who">Eventos e criadores</span>
+        <h3>Diárias e avulsos</h3>
+        <p>Para um evento, um lançamento ou um dia de gravação.</p>
+        <dl>
+          <div><dt>Souna Day</dt><dd>Diária de gravação. Para criadores de conteúdo: até 3 reels e 20 stories.</dd></div>
+          <div><dt>Day Parceiros!</dt><dd>Diária com condição especial para parceiros.</dd></div>
+          <div><dt>Clip 20 · Clip 40 · Motion 90</dt><dd>Pacotes por duração de vídeo: Clip 20 até 20s, Clip 40 até 40s.</dd></div>
+        </dl>
+      </div>
+    </div>
+    <div class="area">
+      <div><b>São Paulo + Santo André</b><span>Atendemos a cidade de São Paulo inteira e Santo André.</span></div>
+      <div><b>Outra cidade?</b><span>Dá pra conversar. Atendemos outros municípios conforme o projeto.</span></div>
+    </div>
+    <p class="plans-note">Quer os valores e o que cada plano inclui em detalhe? Chama a gente que enviamos a tabela completa em PDF.</p>
+  </div>
+</section>
+
+<!-- 08 CASES -->
+<section class="stone bt" id="cases">
+  <div class="wrap">
+    <p class="label"><b>08</b>Cases</p>
+    <h2 class="h2">Quem já fez <span class="y">acontecer.</span></h2>
+    <div class="feat">
+      <div class="feat-media card" style="--tint:#7a0f22;--c:#F2C230">
+        <!-- Troque por: <video src="assets/prime.mp4" muted loop playsinline autoplay></video> -->
+        <div class="media" style="position:absolute;inset:0;aspect-ratio:auto;border:0;border-radius:0"><span class="tint"></span><span class="tag">Cobertura · 15/11</span><span class="name" style="font-size:clamp(30px,4vw,48px)">Pizzaria Prime</span></div>
+      </div>
+      <div class="feat-body">
+        <span class="who">01 · Pizzaria Prime · Pompeia, SP</span>
+        <h3>Três horas de evento, <span class="y">cinco vídeos prontos.</span></h3>
+        <p>A Prime voltou por indicação e chamou a Souna para cobrir a descida da Red Bull na loja da Pompeia. Gravamos a manhã inteira e entregamos vídeos curtos prontos para postar, em dois cortes de duração.</p>
+        <div class="stats">
+          <div><b>5</b><span>vídeos entregues</span></div>
+          <div><b>3h</b><span>de cobertura no local</span></div>
+          <div><b>2</b><span>cortes: 15s e 30s</span></div>
+        </div>
+      </div>
+    </div>
+    <ol class="clist">
+      <li><span class="i">02</span><h4>Nova Passos Pizzas<small>Pizzaria</small></h4><p>Roteiro de produção, calendário editorial em PDF com os links dos posts e animação da logo e da fachada.</p><span class="pill">Roteiro · Motion</span></li>
+      <li><span class="i">03</span><h4>Óticas King<small>Ótica</small></h4><p>Plano Authority. Roteiro de 5 vídeos com referências, e a equipe da loja posta seguindo a nossa orientação.</p><span class="pill">Plano mensal</span></li>
+      <li><span class="i">04</span><h4>Bar do Negão<small>Bar</small></h4><p>Estratégia de crescimento: o humor e a personalidade do dono em cena viraram o formato principal do perfil.</p><span class="pill">Estratégia</span></li>
+      <li><span class="i">05</span><h4>Nova Point Pizza &amp; Esfiha<small>Pizzaria</small></h4><p>Perfil refeito (bio, links e foto) e roteiro de 3 vídeos na paleta da marca.</p><span class="pill">Perfil · Roteiro</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 09 DIVISÃO -->
+<section id="divisao">
+  <div class="wrap">
+    <p class="label"><b>09</b>Combinado</p>
+    <h2 class="h2">O que a Souna faz. <span class="y">O que é seu.</span></h2>
+    <div class="split">
+      <div class="us">
+        <h3 class="y">A Souna faz</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#F2B71E" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>Raio-X do perfil e estratégia</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#F2B71E" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>Roteiro com referências</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#F2B71E" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>Gravação, edição e motion</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#F2B71E" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>Orientação de como e quando postar</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#F2B71E" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>Trazer gente interessada até você</li>
+        </ul>
+      </div>
+      <div>
+        <h3>É com você</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#9C9A92" stroke-width="2.6" stroke-linecap="round"><path d="M6 12h12"/></svg>Responder quem chamar no direct</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#9C9A92" stroke-width="2.6" stroke-linecap="round"><path d="M6 12h12"/></svg>Fechar a venda e atender bem</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#9C9A92" stroke-width="2.6" stroke-linecap="round"><path d="M6 12h12"/></svg>Preço, entrega e regras do negócio</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#9C9A92" stroke-width="2.6" stroke-linecap="round"><path d="M6 12h12"/></svg>Aparecer na câmera quando combinado</li>
+        </ul>
+      </div>
+    </div>
+    <p class="pull">Vídeo bonito não salva produto ruim. <span class="y">Mas mostra o valor de um produto bom.</span></p>
+  </div>
+</section>
+
+<!-- 10 FUNDADOR -->
+<section class="stone bt" id="fundador">
+  <div class="wrap">
+    <div class="founder">
+      <div class="ph">
+        <!-- Troque por: <img src="assets/ale.jpg" alt="Ale, fundador da Souna Studio"> -->
+        <img src="assets/souna-vertical.webp" alt="Arte da Souna com a logo, câmera no gimbal e baú sobre pedra escura" style="object-position:center 40%">
+        <span class="note">foto do Ale em breve</span>
+      </div>
+      <div>
+        <p class="label"><b>10</b>Quem faz</p>
+        <h2 class="h2">Quem roteiriza é <span class="y">quem dirige.</span></h2>
+        <p><strong>Ale</strong> é o fundador da Souna Studio, produtora audiovisual de São Paulo que cria conteúdo para negócios locais: pizzarias, bares, óticas, barbearias, perfumarias, lojas e times de e-sports.</p>
+        <p>A mesma pessoa que escreve o roteiro está no set e acompanha o corte final. Por isso a Souna trabalha com <strong>poucos clientes por vez</strong> e acompanha cada um de perto.</p>
+      </div>
+    </div>
+    <div class="logos" aria-label="Marcas atendidas">
+      <div>Pizzaria Prime</div><div>Nova Passos Pizzas</div><div>Nova Point Pizza &amp; Esfiha</div><div>Jardim dos Perfumes</div><div>Bar do Negão</div>
+      <div>Pizzaria Veneza</div><div>Pizzaria Araújo</div><div>OS ESPOKA</div><div>Império Hamburgueria</div><div>Óticas King</div><div>Barbearia Gabal</div><div>Geek4ever</div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 CTA -->
+<section class="final bt" id="contato">
+  <div class="wrap">
+    <p class="label"><b>11</b>Próximo passo</p>
+    <h2 class="h2">O próximo passo é pequeno: <span class="y">uma conversa.</span></h2>
+    <p class="lead">Conta o que você vende e o que precisa acontecer. A gente responde com uma proposta e o plano que faz sentido pro seu momento.</p>
+    <div class="cta-row">
+      <a class="btn btn-y js-contact" href="https://www.instagram.com/souna.studio/">Quero meu orçamento
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn-o" href="https://www.instagram.com/souna.studio/">@souna.studio</a>
+    </div>
+    <p class="lead" style="margin-top:22px;font-size:16px">WhatsApp <strong>(11) 92646-6766</strong> · atendimento das <strong>11h às 22h</strong></p>
+  </div>
+</section>
+</main>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Vídeo"><button class="x" type="button" id="lbX" aria-label="Fechar vídeo">✕</button><video id="lbV" controls playsinline></video><p id="lbT"></p></div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <img class="fl" src="assets/souna-logo.png" alt="Souna">
+        <p class="tag">Sua História,<br><span class="y">Nossa Arte.</span></p>
+      </div>
+      <div>
+        <h4>Atendemos</h4>
+        <p>São Paulo (capital inteira)</p><p>Santo André</p><p>Outros municípios: é só conversar</p>
+      </div>
+      <div>
+        <h4>Páginas</h4>
+        <a href="#servicos">Serviços</a><a href="#processo">Processo</a><a href="#trabalhos">Trabalhos</a><a href="#planos">Planos</a><a href="#cases">Cases</a>
+      </div>
+      <div>
+        <h4>Contato</h4>
+        <a href="https://www.instagram.com/souna.studio/">Instagram: @souna.studio</a>
+        <p id="waText">Pix, cartão ou transferência</p>
+      </div>
+    </div>
+    <div class="legal"><span>© 2026 Souna Studio · Produtora audiovisual</span><span>Feito em São Paulo</span></div>
+  </div>
+</footer>
+
+<script>
+/* ===== Configuração rápida =====
+   WHATSAPP: só números com DDI e DDD, ex.: "5511999999999".
+   Vazio = os botões levam para o Instagram. */
+const WHATSAPP = "5511926466766";
+const WA_MSG = "Oi, Souna! Vi o portfólio e quero um orçamento.";
+
+(function(){
+  if (WHATSAPP){
+    const url = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(WA_MSG);
+    document.querySelectorAll(".js-contact").forEach(a => a.href = url);
+    const t = document.getElementById("waText");
+    if (t) t.innerHTML = '<a href="'+url+'">WhatsApp: (11) 92646-6766</a>Atendimento das 11h às 22h';
+  }
+
+  // header sólido ao rolar
+  const top = document.getElementById("top");
+  const onScroll = () => top.classList.toggle("solid", scrollY > 40);
+  onScroll(); addEventListener("scroll", onScroll, {passive:true});
+
+  // menu tela cheia
+  const b = document.getElementById("burger"), ov = document.getElementById("overlay");
+  const setMenu = o => { document.body.classList.toggle("menu-open", o); b.setAttribute("aria-expanded", o); b.setAttribute("aria-label", o ? "Fechar menu" : "Abrir menu"); document.body.style.overflow = o ? "hidden" : ""; };
+  b.addEventListener("click", () => setMenu(!document.body.classList.contains("menu-open")));
+  ov.querySelectorAll("a").forEach(a => a.addEventListener("click", () => setMenu(false)));
+  addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
+
+  // timecode do REC (24 fps, como o vídeo)
+  const tc = document.getElementById("tc"), v = document.getElementById("heroVid"), t0 = performance.now();
+  const pad = n => String(n).padStart(2,"0");
+  (function tick(){
+    const s = (performance.now()-t0)/1000;
+    tc.textContent = pad(Math.floor(s/3600)) + ":" + pad(Math.floor(s/60)%60) + ":" + pad(Math.floor(s)%60) + ":" + pad(Math.floor(s*24)%24);
+    requestAnimationFrame(tick);
+  })();
+  try { v.play().catch(()=>{}); } catch(e){}
+
+  // faixa de trabalhos: setas + arrastar com o mouse
+  const st = document.getElementById("strip");
+  const step = () => (st.querySelector(".card")?.offsetWidth || 260) + 14;
+  document.getElementById("prev").onclick = () => st.scrollBy({left:-step()*2, behavior:"smooth"});
+  document.getElementById("next").onclick = () => st.scrollBy({left: step()*2, behavior:"smooth"});
+  let down=false, sx=0, sl=0;
+  st.addEventListener("pointerdown", e => { if (e.pointerType!=="mouse") return; down=true; sx=e.clientX; sl=st.scrollLeft; st.classList.add("drag"); });
+  addEventListener("pointerup", () => { down=false; st.classList.remove("drag"); });
+  st.addEventListener("pointermove", e => { if (down) st.scrollLeft = sl - (e.clientX - sx); });
+
+  // vídeos da faixa: tocam mudos quando aparecem
+  const vids=[...document.querySelectorAll(".card video")];
+  if ("IntersectionObserver" in window){
+    const io=new IntersectionObserver(es=>es.forEach(en=>{const v=en.target; if(en.isIntersecting){v.preload="auto"; v.play().catch(()=>{});} else v.pause();}),{threshold:.35});
+    vids.forEach(v=>io.observe(v));
+  }
+  // lightbox com som
+  const lb=document.getElementById("lb"), lbV=document.getElementById("lbV"), lbT=document.getElementById("lbT");
+  let moved=0;
+  st.addEventListener("pointerdown",e=>{moved=e.clientX}); 
+  document.querySelectorAll(".js-open").forEach(b=>b.addEventListener("click",e=>{
+    if (Math.abs(e.clientX-moved)>8 && e.clientX) return;
+    lbV.src=b.dataset.src; lbT.textContent=b.dataset.title; lb.classList.add("on"); document.body.style.overflow="hidden";
+    lbV.muted=false; lbV.play().catch(()=>{});
+  }));
+  const close=()=>{lb.classList.remove("on"); lbV.pause(); lbV.removeAttribute("src"); lbV.load(); document.body.style.overflow="";};
+  document.getElementById("lbX").onclick=close;
+  lb.addEventListener("click",e=>{ if(e.target===lb) close(); });
+  addEventListener("keydown",e=>{ if(e.key==="Escape" && lb.classList.contains("on")) close(); });
+  document.querySelector('a[href="#reel"]')?.addEventListener("click",e=>{ e.preventDefault(); document.querySelector("#reel .js-open").click(); });
+
+  // hero: alterna os vídeos dos clientes, ~4,5s cada
+  const H=[["assets/hero.mp4","Souna"],["assets/v12.mp4","Nova Passos"],["assets/v02.mp4","Jardim dos Perfumes"],["assets/v06.mp4","Nova Point"],["assets/v05.mp4","Óticas King"],["assets/v14.mp4","Barbearia Gabal"],["assets/v13.mp4","Pizzaria"],["assets/v15.mp4","Jardim dos Perfumes"],["assets/v16.mp4","Discotecando Histórias"]];
+  const hnI=document.getElementById("hnI"), hnN=document.getElementById("hnN"); document.getElementById("hnT").textContent=String(H.length).padStart(2,"0");
+  let hi=0, hT;
+  const reduceM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function nextHero(){
+    hi=(hi+1)%H.length; v.classList.add("fade");
+    setTimeout(()=>{ v.src=H[hi][0]; v.play().catch(()=>{}); v.classList.remove("fade"); hnI.textContent=String(hi+1).padStart(2,"0"); hnN.textContent=H[hi][1]; },450);
+  }
+  function arm(){ clearTimeout(hT); hT=setTimeout(nextHero, hi===0?9500:4500); }
+  v.addEventListener("playing",arm);
+  v.addEventListener("ended",nextHero);
+  if (reduceM){ v.loop=true; }
+})();
+</script>
+</body>
+</html>
